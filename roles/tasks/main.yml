@@ -18,23 +18,23 @@
       disk:
         - size_gb: "{{ vmw_disk_size }}"
           type: thin
-          datastore: '{{ vmw_datastore }}'
+          datastore: "{{ vmw_datastore }}"
       networks:
-        - name: "server_network
-          ip: "{{ custom_ip }}"
-          vmw_netmask: "{{ netmask }}"
-          vmw_gateway: "{{ gateway }}"
-          dns_servers:
-          - "{{ vmw_dns_server1 }}"
-          - "{{ vmw_dns_server2 }}"
+        - name: "{{ vmw_network }}"
+#          ip: "{{ custom_ip }}"
+#          vmw_netmask: "{{ netmask }}"
+#          vmw_gateway: "{{ gateway }}"
+#          dns_servers:
+#          - "{{ vmw_dns_server1 }}"
+#          - "{{ vmw_dns_server2 }}"
       hardware:
         memory_mb: "{{ vmw_mem }}"
         num_cpus: "{{ vmw_cpu }}"
-      customization:
-        dns_servers:
-        - "{{ dns_server1 }}"
-        - "{{ dns_server2 }}"
-        domain : "{{ domain }}"
-        hostname: "{{ environment }}-{{ instance_name }}"
+#      customization:
+#        dns_servers:
+#        - "{{ dns_server1 }}"
+#        - "{{ dns_server2 }}"
+#        domain : "{{ domain }}"
+#        hostname: "{{ environment }}-{{ instance_name }}"
       wait_for_ip_address: yes
     register: newvm
