@@ -1,43 +1,42 @@
 ---
-- name: "Deploy {{ vmw_environment }} environment on VMware"
-  tasks:
-
-  # Create a VM from a template
-  - name: create VM
-    local_action:
-      module: vmware_guest
-      datacenter: "{{ vmw_datacenter }}"
-      cluster: "{{ vmw_cluster }}"
-      resource_pool: "{{ vmw_resourcepool|default(omit, true) }}"
-      folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
-      name: "{{ vmw_environment }}-{{ item.name }}"
-      template: "{{ vmw_template }}"
-      state: poweredon
-      guest_id: "{{ vmw_os_type }}"
-      annotation: "{{ vmw_server_role }} - {{ vmw_environment }}"
-      disk:
-        - size_gb: "{{ vmw_disk_size }}"
-          type: thin
-          datastore: "{{ vmw_datastore }}"
-      networks:
-        - name: "{{ vmw_network }}"
+# Create a VM from a template
+- name: create VM
+  local_action:
+    module: vmware_guest
+    datacenter: "{{ vmw_datacenter }}"
+    cluster: "{{ vmw_cluster }}"
+    resource_pool: "{{ vmw_resourcepool|default(omit, true) }}"
+    folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
+    name: "{{ vmw_environment }}-{{ item.name }}"
+    template: "{{ vmw_template }}"
+    state: poweredon
+    guest_id: "{{ vmw_os_type }}"
+    annotation: "{{ vmw_server_role }} - {{ vmw_environment }}"
+    disk:
+      - size_gb: "{{ vmw_disk_size }}"
+        type: thin
+        datastore: "{{ vmw_datastore }}"
+    networks:
+      - name: "{{ vmw_network }}"
 #          ip: "{{ custom_ip }}"
 #          vmw_netmask: "{{ netmask }}"
 #          vmw_gateway: "{{ gateway }}"
 #          dns_servers:
 #          - "{{ vmw_dns_server1 }}"
 #          - "{{ vmw_dns_server2 }}"
-      hardware:
-        memory_mb: "{{ vmw_mem }}"
-        num_cpus: "{{ vmw_cpu }}"
+    hardware:
+      memory_mb: "{{ vmw_mem }}"
+      num_cpus: "{{ vmw_cpu }}"
 #      customization:
 #        dns_servers:
 #        - "{{ dns_server1 }}"
 #        - "{{ dns_server2 }}"
 #        domain : "{{ domain }}"
 #        hostname: "{{ environment }}-{{ instance_name }}"
-      wait_for_ip_address: yes
-    register: newvm
+    wait_for_ip_address: yes
+  register: newvm
+
+-debug: var=newvm
 
 - name: Add instances to inventory
   local_action:
@@ -50,4 +49,4 @@
       - "vmw"
       - "{{ instance_role }}"
       - "{{ os_type }}"
-#         - "tag_Environment_{{ item.item.Environment }}"
+  #         - "tag_Environment_{{ item.item.Environment }}"
