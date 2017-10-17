@@ -7,6 +7,7 @@
     username: "{{ vmw_username }}"
     password: "{{ vmw_password }}"
     hostname: "{{ vmw_hostname }}"
+    validate_certs: "false"
     cluster: "{{ vmw_cluster }}"
     resource_pool: "{{ vmw_resourcepool|default(omit, true) }}"
     folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
