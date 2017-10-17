@@ -4,6 +4,9 @@
   local_action:
     module: vmware_guest
     datacenter: "{{ vmw_datacenter }}"
+    username: "{{ vmw_username }}"
+    password: "{{ vmw_password }}"
+    hostname: "{{ vmw_hostname }}"
     cluster: "{{ vmw_cluster }}"
     resource_pool: "{{ vmw_resourcepool|default(omit, true) }}"
     folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
