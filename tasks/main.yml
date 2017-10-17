@@ -12,7 +12,6 @@
     resource_pool: "{{ vmw_resourcepool|default(omit, true) }}"
     folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
     name: "{{ vmw_environment }}-{{ vmw_name }}"
-    from_template: "yes"
     template: "{{ vmw_template }}"
     state: poweredon
     guest_id: "{{ vmw_os_type }}"
