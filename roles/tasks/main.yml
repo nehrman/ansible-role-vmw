@@ -36,7 +36,7 @@
     wait_for_ip_address: yes
   register: newvm
 
--debug: var=newvm
+- debug: var=newvm
 
 - name: Add instances to inventory
   local_action:
