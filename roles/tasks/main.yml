@@ -11,7 +11,7 @@
       resource_pool: "{{ vmw_resourcepool|default(omit, true) }}"
       folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
       name: "{{ vmw_environment }}-{{ item.name }}"
-      template: "{{ vmw_templates }}"
+      template: "{{ vmw_template }}"
       state: poweredon
       guest_id: "{{ vmw_os_type }}"
       annotation: "{{ vmw_server_role }} - {{ vmw_environment }}"
@@ -38,3 +38,16 @@
 #        hostname: "{{ environment }}-{{ instance_name }}"
       wait_for_ip_address: yes
     register: newvm
+
+- name: Add instances to inventory
+  local_action:
+    module: add_host
+    name: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
+    ansible_host: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
+    ansible_user: "{{ instance_ansible_user }}"
+    ansible_port: "{{ instance_ansible_port }}"
+    groups:
+      - "vmw"
+      - "{{ instance_role }}"
+      - "{{ os_type }}"
+#         - "tag_Environment_{{ item.item.Environment }}"
