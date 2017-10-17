@@ -22,11 +22,11 @@
       networks:
         - name: "server_network
           ip: "{{ custom_ip }}"
-          netmask: "{{ netmask }}"
-          gateway: "{{ gateway }}"
+          vmw_netmask: "{{ netmask }}"
+          vmw_gateway: "{{ gateway }}"
           dns_servers:
-          - "{{ dns_server1 }}"
-          - "{{ dns_server2 }}"
+          - "{{ vmw_dns_server1 }}"
+          - "{{ vmw_dns_server2 }}"
       hardware:
         memory_mb: "{{ vmw_mem }}"
         num_cpus: "{{ vmw_cpu }}"
