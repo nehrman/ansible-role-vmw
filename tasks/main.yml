@@ -13,7 +13,7 @@
     folder: "/{{ vmw_folder }}/{{ vmw_environment }}"
     name: "{{ vmw_environment }}-{{ vmw_name }}"
     from_template: "yes"
-    template_src: "{{ vmw_template }}"
+    template: "{{ vmw_template }}"
     state: poweredon
     guest_id: "{{ vmw_os_type }}"
     annotation: "{{ vmw_server_role }} - {{ vmw_environment }}"
