@@ -42,15 +42,15 @@
 
 - debug: var=newvm
 
-- name: Add instances to inventory
-  local_action:
-    module: add_host
-    name: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
-    ansible_host: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
-    ansible_user: "{{ instance_ansible_user }}"
-    ansible_port: "{{ instance_ansible_port }}"
-    groups:
-      - "vmw"
-      - "{{ instance_role }}"
-      - "{{ os_type }}"
-  #         - "tag_Environment_{{ item.item.Environment }}"
+#- name: Add instances to inventory
+#  local_action:
+#    module: add_host
+#    name: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
+#    ansible_host: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
+#    ansible_user: "{{ instance_ansible_user }}"
+#    ansible_port: "{{ instance_ansible_port }}"
+#    groups:
+#      - "vmw"
+#      - "{{ instance_role }}"
+#      - "{{ os_type }}"
+#           - "tag_Environment_{{ item.item.Environment }}"
